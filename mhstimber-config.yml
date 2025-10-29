@@ -1,0 +1,5 @@
+tunnel: 788d4015-5401-494b-81ef-9b46992ab5d8
+credentials-file: C:\Users\crazy\.cloudflared\788d4015-5401-494b-81ef-9b46992ab5d8.json
+
+ingress:
+  - service: http://localhost:3000

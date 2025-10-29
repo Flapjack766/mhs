@@ -1,0 +1,25 @@
+tunnel: 364b2247-00a4-430b-8944-b800e2394d40
+credentials-file: C:\Users\crazy\.cloudflared\364b2247-00a4-430b-8944-b800e2394d40.json
+
+ingress:
+  - hostname: mhstimber.com
+    service: http://localhost:3000
+    originRequest:
+      noTLSVerify: true
+      connectTimeout: 60s
+      tlsTimeout: 30s
+      tcpKeepAlive: 30s
+      keepAliveConnections: 100
+      keepAliveTimeout: 90s
+      httpHostHeader: localhost:3000
+  - hostname: www.mhstimber.com
+    service: http://localhost:3000
+    originRequest:
+      noTLSVerify: true
+      connectTimeout: 60s
+      tlsTimeout: 30s
+      tcpKeepAlive: 30s
+      keepAliveConnections: 100
+      keepAliveTimeout: 90s
+      httpHostHeader: localhost:3000
+  - service: http_status:404
