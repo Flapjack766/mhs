@@ -28,6 +28,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+.env.local
 .env*.local
 .env
 
@@ -41,3 +42,9 @@ next-env.d.ts
 # wrangler
 .wrangler/
 wrangler.toml.backup
+
+# cloudflare tunnel configs (may contain absolute paths)
+config.yml
+mhstimber-config.yml
+tunnel-config.yml
+.cloudflared/
