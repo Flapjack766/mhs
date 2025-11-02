@@ -15,7 +15,6 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
   reactStrictMode: false,
-  swcMinify: true,
   // Next-intl configuration
   trailingSlash: false,
 };
