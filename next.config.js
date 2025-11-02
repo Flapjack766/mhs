@@ -19,9 +19,6 @@ const nextConfig = {
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
   },
-  env: {
-    _next_intl_trailing_slash: 'false',
-  },
   // Optimize for mobile and Cloudflare
   compress: true,
   poweredByHeader: false,
@@ -30,7 +27,7 @@ const nextConfig = {
   experimental: {
     optimizeCss: false,
   },
-  // SEO headers
+  // SEO headers - simplified to avoid micromatch issues
   async headers() {
     return [
       {
@@ -51,28 +48,6 @@ const nextConfig = {
           {
             key: 'Referrer-Policy',
             value: 'strict-origin-when-cross-origin',
-          },
-          {
-            key: 'Permissions-Policy',
-            value: 'geolocation=(), microphone=(), camera=()',
-          },
-        ],
-      },
-      {
-        source: '/robots.txt',
-        headers: [
-          {
-            key: 'Content-Type',
-            value: 'text/plain; charset=utf-8',
-          },
-        ],
-      },
-      {
-        source: '/sitemap.xml',
-        headers: [
-          {
-            key: 'Content-Type',
-            value: 'application/xml; charset=utf-8',
           },
         ],
       },
