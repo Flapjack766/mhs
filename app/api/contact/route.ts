@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const RESEND_API_KEY = process.env.RESEND_API_KEY;
-
-if (!RESEND_API_KEY) {
-  throw new Error('RESEND_API_KEY is not set in environment variables');
+// Initialize Resend - will throw error at runtime if key is missing
+function getResend() {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    throw new Error('RESEND_API_KEY is not set in environment variables');
+  }
+  return new Resend(apiKey);
 }
-
-const resend = new Resend(RESEND_API_KEY);
 
 // Generate unique ticket number
 function generateTicketNumber(): string {
@@ -18,6 +19,9 @@ function generateTicketNumber(): string {
 
 export async function POST(request: NextRequest) {
   try {
+    // Initialize Resend inside handler to avoid build-time error
+    const resend = getResend();
+    
     const body = await request.json();
     const { firstName, lastName, email, phone, message } = body;
 
