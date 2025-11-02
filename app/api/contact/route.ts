@@ -432,11 +432,26 @@ export async function POST(request: NextRequest) {
       message: 'Emails sent successfully'
     });
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('API error:', error);
+    
+    // Provide more specific error messages
+    let errorMessage = 'Internal server error';
+    let statusCode = 500;
+    
+    if (error.message && error.message.includes('RESEND_API_KEY')) {
+      errorMessage = 'Email service is not configured. Please contact the administrator.';
+      statusCode = 503; // Service Unavailable
+    } else if (error.message) {
+      errorMessage = error.message;
+    }
+    
     return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
+      { 
+        error: errorMessage,
+        details: process.env.NODE_ENV === 'development' ? error.message : undefined
+      },
+      { status: statusCode }
     );
   }
 }
