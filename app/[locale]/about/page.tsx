@@ -1,8 +1,62 @@
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
-export default function AboutPage() {
-  const t = useTranslations();
+export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
+  const t = await getTranslations();
+  const isArabic = locale === 'ar';
+  
+  return {
+    title: isArabic 
+      ? 'من نحن - سماقيه للأخشاب'
+      : 'About Us - Sammakieh Timbers',
+    description: isArabic
+      ? 'تعرف على شركة سماقيه للأخشاب، مهمتنا ورؤيتنا والتزامنا بالتميز في صناعة الأخشاب. شراكة موثوقة وجودة مضمونة.'
+      : 'Learn about Sammakieh Timbers, our mission, vision, and commitment to excellence in the timber industry. Trusted partnership and guaranteed quality.',
+    keywords: isArabic
+      ? 'من نحن، شركة الأخشاب، سماقيه، تاريخ الشركة، مهمة الشركة'
+      : 'about us, timber company, history, mission, vision, company values',
+    alternates: {
+      canonical: `https://mhstimber.com/${locale}/about`,
+      languages: {
+        en: 'https://mhstimber.com/en/about',
+        ar: 'https://mhstimber.com/ar/about',
+        'x-default': 'https://mhstimber.com/en/about',
+      },
+    },
+    openGraph: {
+      title: isArabic ? 'من نحن - سماقيه للأخشاب' : 'About Us - Sammakieh Timbers',
+      description: isArabic
+        ? 'تعرف على شركة سماقيه للأخشاب ومهمتنا ورؤيتنا'
+        : 'Learn about Sammakieh Timbers, our mission and vision',
+      url: `https://mhstimber.com/${locale}/about`,
+      siteName: 'Sammakieh Timbers',
+      images: [
+        {
+          url: '/images/about-company.jpg',
+          width: 1200,
+          height: 630,
+          alt: isArabic ? 'من نحن - سماقيه للأخشاب' : 'About Us - Sammakieh Timbers',
+        },
+      ],
+      locale: isArabic ? 'ar_SA' : 'en_US',
+      type: 'website',
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-image-preview': 'large',
+      },
+    },
+  };
+}
+
+export default async function AboutPage() {
+  const t = await getTranslations();
 
   return (
     <div className="bg-gray-100 min-h-screen">

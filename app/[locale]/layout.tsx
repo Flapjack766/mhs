@@ -17,18 +17,28 @@ export async function generateMetadata({ params: { locale } }: { params: { local
     metadataBase: new URL('https://mhstimber.com'),
     title: isArabic ? 'سماقيه للأخشاب | مورد الأخشاب الرائد' : 'Sammakieh Timbers | Premium Timber',
     description: isArabic 
-      ? 'مورد الأخشاب الرائد في المملكة العربية السعودية. نقدم أجود أنواع الأخشاب لمشاريع البناء والتشييد.'
-      : 'Leading timber supplier in Saudi Arabia providing high-quality construction wood and timber solutions.',
-    keywords: 'timber, wood, construction, Saudi Arabia, building materials, أخشاب, بناء, السعودية, سماقيه',
+      ? 'مورد الأخشاب الرائد في المملكة العربية السعودية. نقدم أجود أنواع الأخشاب لمشاريع البناء والتشييد. خدمة موثوقة وجودة مضمونة.'
+      : 'Leading timber supplier in Saudi Arabia providing high-quality construction wood and timber solutions. Premium quality, reliable service, and fast delivery.',
+    keywords: isArabic
+      ? 'أخشاب، خشب، بناء، السعودية، سماقيه، الأخشاب، مواد بناء، خشب سويدي، خشب فنلندي'
+      : 'timber, wood, construction, Saudi Arabia, building materials, Swedish wood, Finnish wood, plywood, construction supplies',
     applicationName: 'Sammakieh Timbers',
     authors: [{ name: 'Sammakieh Timbers' }],
     generator: 'Next.js',
+    alternates: {
+      canonical: `https://mhstimber.com/${locale}`,
+      languages: {
+        en: 'https://mhstimber.com/en',
+        ar: 'https://mhstimber.com/ar',
+        'x-default': 'https://mhstimber.com',
+      },
+    },
     openGraph: {
-      title: isArabic ? 'سماقيه للأخشاب' : 'Sammakieh Timbers - Premium Timber Solutions',
+      title: isArabic ? 'سماقيه للأخشاب - مورد الأخشاب الرائد' : 'Sammakieh Timbers - Premium Timber Solutions',
       description: isArabic 
         ? 'مورد الأخشاب الرائد في السعودية مع أعلى جودة وخدمة موثوقة'
         : 'Leading timber supplier in Saudi Arabia with premium quality and reliable service',
-      url: 'https://mhstimber.com',
+      url: `https://mhstimber.com/${locale}`,
       siteName: 'Sammakieh Timbers',
       images: [
         {
@@ -65,6 +75,21 @@ export async function generateMetadata({ params: { locale } }: { params: { local
       statusBarStyle: 'default',
       title: isArabic ? 'سماقيه للأخشاب' : 'Sammakieh Timbers',
     },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+    verification: {
+      // Add Google Search Console verification when available
+      // google: 'verification-code-here',
+    },
   };
 }
 
@@ -94,6 +119,15 @@ export default async function LocaleLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        {/* Hreflang tags for multilingual SEO */}
+        <link rel="alternate" hrefLang="en" href={`https://mhstimber.com/en${typeof window === 'undefined' ? '' : window.location.pathname.replace(/^\/[a-z]{2}/, '') || '/'}`} />
+        <link rel="alternate" hrefLang="ar" href={`https://mhstimber.com/ar${typeof window === 'undefined' ? '' : window.location.pathname.replace(/^\/[a-z]{2}/, '') || '/'}`} />
+        <link rel="alternate" hrefLang="x-default" href="https://mhstimber.com" />
+        {/* Preconnect for performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* DNS Prefetch */}
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
       </head>
       <body suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>

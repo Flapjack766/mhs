@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ImageSlider from '@/components/ImageSlider';
 import { useParams } from 'next/navigation';
+import Script from 'next/script';
 
 export default function HomePage() {
   const t = useTranslations();
@@ -50,8 +51,66 @@ export default function HomePage() {
     { number: t('A128'), label: t('A129') }
   ];
 
+  const isArabic = locale === 'ar';
+
+  // Structured Data JSON-LD for SEO
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: isArabic ? 'سماقيه للأخشاب' : 'Sammakieh Timbers',
+    alternateName: 'MHS Timber',
+    url: `https://mhstimber.com/${locale}`,
+    logo: 'https://mhstimber.com/logos/main-logo.png',
+    description: isArabic
+      ? 'مورد الأخشاب الرائد في المملكة العربية السعودية'
+      : 'Leading timber supplier in Saudi Arabia',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '31 Al Islam Street, Al Hamra',
+      addressLocality: 'Jeddah',
+      addressCountry: 'SA',
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+966-55-776-0117',
+      contactType: 'Customer Service',
+      email: 'info@mhstimber.com',
+      areaServed: 'SA',
+      availableLanguage: ['ar', 'en'],
+    },
+    sameAs: [],
+    areaServed: {
+      '@type': 'Country',
+      name: 'Saudi Arabia',
+    },
+  };
+
+  const websiteStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: isArabic ? 'سماقيه للأخشاب' : 'Sammakieh Timbers',
+    url: `https://mhstimber.com/${locale}`,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `https://mhstimber.com/${locale}/products?q={search_term_string}`,
+      'query-input': 'required name=search_term_string',
+    },
+  };
+
   return (
     <div className="relative">
+      {/* Structured Data for SEO */}
+      <Script
+        id="organization-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <Script
+        id="website-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteStructuredData) }}
+      />
+
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden -mt-20 pt-20">
         {/* Background Image Slider */}
