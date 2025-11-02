@@ -19,18 +19,6 @@ const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: false,
   swcMinify: true,
-  // Exclude problematic files from build tracing to prevent micromatch stack overflow
-  outputFileTracingExcludes: {
-    '*': [
-      'config.yml',
-      'mhstimber-config.yml',
-      'tunnel-config.yml',
-      'wrangler.toml',
-      '.cloudflared/**',
-      '*.yml',
-      '*.toml',
-    ],
-  },
 };
 
 module.exports = withNextIntl(nextConfig);
