@@ -16,6 +16,11 @@ const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: false,
   swcMinify: true,
+  // Next-intl configuration
+  trailingSlash: false,
+  env: {
+    _next_intl_trailing_slash: 'false',
+  },
 };
 
 module.exports = withNextIntl(nextConfig);
