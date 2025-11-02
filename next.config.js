@@ -11,9 +11,6 @@ const nextConfig = {
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
   },
-  env: {
-    _next_intl_trailing_slash: 'false',
-  },
   // Optimize for mobile and Cloudflare
   compress: true,
   poweredByHeader: false,
