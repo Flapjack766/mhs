@@ -9,6 +9,7 @@ export default getRequestConfig(async ({locale}) => {
   if (!locale || !locales.includes(locale as any)) notFound();
 
   return {
+    locale, // Return locale as required by next-intl
     messages: (await import(`../messages/${locale}.json`)).default,
     timeZone: 'Asia/Riyadh',
     now: new Date()
