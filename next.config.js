@@ -18,9 +18,15 @@ const nextConfig = {
   swcMinify: true,
   // Next-intl configuration
   trailingSlash: false,
-  env: {
-    _next_intl_trailing_slash: 'false',
-  },
 };
 
-module.exports = withNextIntl(nextConfig);
+// Apply next-intl plugin and add trailing slash env var
+const configWithNextIntl = withNextIntl(nextConfig);
+
+// Add env var after plugin transformation
+configWithNextIntl.env = {
+  ...configWithNextIntl.env,
+  _next_intl_trailing_slash: 'false',
+};
+
+module.exports = configWithNextIntl;
