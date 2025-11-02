@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend('re_PafiSWwH_KTGR11adET5wxXFPQJQBGCLJ');
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+
+if (!RESEND_API_KEY) {
+  throw new Error('RESEND_API_KEY is not set in environment variables');
+}
+
+const resend = new Resend(RESEND_API_KEY);
 
 // Generate unique ticket number
 function generateTicketNumber(): string {
