@@ -34,7 +34,7 @@ export default function PeoplePage() {
                 src="/images/Mounzer.jpg"
                 alt={t('A101')}
                 fill
-                className="object-cover rounded-full"
+                className="object-cover object-top rounded-full"
               />
             </div>
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
@@ -128,6 +128,12 @@ export default function PeoplePage() {
                   <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                 </svg>
                 <span dir="ltr">info@vetaps.com</span>
+              </a>
+              <a href="https://vetaps.com" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center space-x-2 hover:text-timber-600 transition-colors">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                </svg>
+                <span dir="ltr">vetaps.com</span>
               </a>
             </div>
           </div>
